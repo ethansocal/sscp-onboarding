@@ -1,0 +1,22 @@
+[package]
+name = "sscp-onboarding"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "sscp-onboarding"
+test = false
+bench = false
+
+[dependencies]
+cortex-m = { version = "0.7.9", features = ["critical-section-single-core"] }
+cortex-m-rt = "0.7.7"
+defmt = "1.1.1"
+embassy-stm32 = { version = "0.6.0", features = ["stm32f429zi", "memory-x"] }
+panic-halt = "1.0.0"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
