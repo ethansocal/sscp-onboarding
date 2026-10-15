@@ -4,6 +4,7 @@
 use cortex_m::{Peripherals, delay::Delay};
 use cortex_m_rt::entry;
 use embassy_stm32::gpio::{Level, Output, Speed};
+use defmt_rtt as _;
 use panic_halt as _;
 
 const BLINK_INTERVAL_MS: u32 = 100;
@@ -19,6 +20,9 @@ fn main() -> ! {
 
     let mut delay = Delay::new(core.SYST, CORE_CLOCK_HZ);
 
+    defmt::info!("Hello from the STM32!");
+    let mut count: u32 = 0;
+
     loop {
         // delay.delay_ms(BLINK_INTERVAL_MS);
         // led.toggle();
@@ -26,5 +30,7 @@ fn main() -> ! {
         delay.delay_ms(100);
         led.set_low();
         delay.delay_ms(900);
+        count += 1;
+        defmt::info!("blink #{}", count);
     }
 }
